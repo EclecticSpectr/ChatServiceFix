@@ -78,13 +78,14 @@ class ChatServise {
     }
 
     fun getMessages(chatId: Long): List<Message> =
-        chats
+        chats.asSequence()
             .sortedByDescending { it.id }
             .filter {
                 it.id == chatId
             }
             .map { it.messages }
             .flatten()
+            .toList()
 
     fun getChats(): List<Chat> {
         return chats
